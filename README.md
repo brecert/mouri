@@ -6,7 +6,7 @@ Please note that this is not meant to handle many edge cases, and is meant and m
 
 # Usage
 ```js
-import uri from 'mouri'
+import uri from 'https://github.com/Brecert/mouri/blob/main/mod.ts'
 
 const API_URL = 'https://api.example.com/';
 
@@ -34,7 +34,7 @@ expected result:
             
 |Name|Runs|Total (ms)|Average (ms)|
 |:--|--:|--:|--:|
-|mouri|1000|40.019|0.040|
-|handwritten|1000|181.523|0.182|
-|urlcat|1000|134.170|0.134|
+|mouri|1000|39.693|0.040|
+|handwritten|1000|183.275|0.183|
+|urlcat|1000|135.666|0.136|
 <!-- BENCHMARKS END -->
