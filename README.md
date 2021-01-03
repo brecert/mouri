@@ -34,7 +34,7 @@ expected result:
             
 |Name|Runs|Total (ms)|Average (ms)|
 |:--|--:|--:|--:|
-|mouri|1000|39.693|0.040|
-|handwritten|1000|183.275|0.183|
-|urlcat|1000|135.666|0.136|
+|mouri|1000|33.500|0.033|
+|urlcat|1000|193.732|0.194|
+|handwritten|1000|128.184|0.128|
 <!-- BENCHMARKS END -->

@@ -36,6 +36,17 @@ bench({
   },
 });
 
+
+bench({
+  name: "urlcat",
+  runs: RUNS,
+  func(b): void {
+    b.start();
+    urlcat(API_URL, "/users/:id/posts", { id, limit, offset });
+    b.stop();
+  },
+});
+
 bench({
   name: "handwritten",
   runs: RUNS,
@@ -50,16 +61,6 @@ bench({
       offset: offset.toString(),
     }).toString();
     url.href;
-    b.stop();
-  },
-});
-
-bench({
-  name: "urlcat",
-  runs: RUNS,
-  func(b): void {
-    b.start();
-    urlcat(API_URL, "/users/:id/posts", { id, limit, offset });
     b.stop();
   },
 });
