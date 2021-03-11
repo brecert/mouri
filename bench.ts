@@ -3,14 +3,14 @@
 import {
   bench,
   runBenchmarks,
-} from "https://deno.land/std@0.71.0/testing/bench.ts";
+} from "https://deno.land/std@0.90.0/testing/bench.ts";
 
 import {
   defaultColumns,
   prettyBenchmarkDown,
   prettyBenchmarkProgress,
   prettyBenchmarkResult,
-} from "https://deno.land/x/pretty_benching@v0.3.0/mod.ts";
+} from "https://deno.land/x/pretty_benching@v0.3.2/mod.ts";
 
 import uri from "./uri.ts";
 import jspmUrlcat from "https://jspm.dev/urlcat";

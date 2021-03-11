@@ -29,21 +29,18 @@ userPostsUrl("112233445566778899", 10, 5);
 To run: `deno run .\bench.ts`
 
 <!-- BENCHMARKS START -->
-
 ## Simple URL joining
 
-pattern:
 
+pattern:
 > `{API_URL}/users/{id}/posts/limit={limit}&offset={offset}`
 
 expected result:
-
 > `https://api.example.com/users/112233445566778899/posts/limit=10&offset=5`
-
-| Name        | Runs | Total (ms) | Average (ms) |
-| :---------- | ---: | ---------: | -----------: |
-| mouri       | 1000 |     33.500 |        0.033 |
-| urlcat      | 1000 |    193.732 |        0.194 |
-| handwritten | 1000 |    128.184 |        0.128 |
-
+            
+|Name|Runs|Total (ms)|Average (ms)|
+|:--|--:|--:|--:|
+|mouri|1000|46.245|0.046|
+|urlcat|1000|125.284|0.125|
+|handwritten|1000|104.410|0.104|
 <!-- BENCHMARKS END -->
