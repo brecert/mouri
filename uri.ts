@@ -70,9 +70,6 @@ const uri = (
   return output;
 };
 
-export {
-  uri,
-  convertValue,
-};
+export { convertValue, uri };
 
 export default uri;

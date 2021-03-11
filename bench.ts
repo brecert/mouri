@@ -6,10 +6,10 @@ import {
 } from "https://deno.land/std@0.71.0/testing/bench.ts";
 
 import {
-  prettyBenchmarkResult,
-  prettyBenchmarkProgress,
-  prettyBenchmarkDown,
   defaultColumns,
+  prettyBenchmarkDown,
+  prettyBenchmarkProgress,
+  prettyBenchmarkResult,
 } from "https://deno.land/x/pretty_benching@v0.3.0/mod.ts";
 
 import uri from "./uri.ts";
@@ -35,7 +35,6 @@ bench({
     b.stop();
   },
 });
-
 
 bench({
   name: "urlcat",
@@ -79,13 +78,13 @@ runBenchmarks(
   .then(
     prettyBenchmarkDown(
       (markdown) => {
-        if(Deno.args[0] === "update-readme") {
+        if (Deno.args[0] === "update-readme") {
           const readme = Deno.readTextFileSync("./README.md");
           const modifiedReadme = readme.replace(
             /(<!-- BENCHMARKS START -->)[^]+(<!-- BENCHMARKS END -->)/g,
             `$1\n${markdown.trim()}\n$2`,
           );
-  
+
           Deno.writeTextFileSync("./README.md", modifiedReadme);
         }
       },
