@@ -1,0 +1,22 @@
+{
+  "type": "module",
+  "name": "mouri",
+  "version": "1.0.0",
+  "description": "A simple, easy to use, and relatively performant way to create and join uri parts together.",
+  "module": "publish/uri.js",
+  "types": "uri.ts",
+  "files": [
+    "publish/*",
+    "uri.ts",
+    "tsconfig.json"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "author": "bree",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.2.4"
+  }
+}
