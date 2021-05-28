@@ -9,7 +9,7 @@ made for simple use cases.
 # Usage
 
 ```js
-import uri from "https://deno.land/x/mouri/mod.ts";
+import uri from "https://deno.land/x/mouri@1.0.0/mod.ts";
 
 const API_URL = "https://api.example.com/";
 
