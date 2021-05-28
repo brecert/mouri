@@ -9,7 +9,7 @@ made for simple use cases.
 # Usage
 
 ```js
-import uri from "https://github.com/Brecert/mouri/blob/main/mod.ts";
+import uri from "https://deno.land/x/mouri/mod.ts";
 
 const API_URL = "https://api.example.com/";
 
@@ -40,7 +40,7 @@ expected result:
             
 |Name|Runs|Total (ms)|Average (ms)|
 |:--|--:|--:|--:|
-|mouri|1000|46.245|0.046|
-|urlcat|1000|125.284|0.125|
-|handwritten|1000|104.410|0.104|
+|mouri|1000|13.391|0.013|
+|urlcat|1000|19.609|0.020|
+|handwritten|1000|34.631|0.035|
 <!-- BENCHMARKS END -->
