@@ -8,25 +8,23 @@ type ParamValue =
   | URLSearchParams
   | undefined;
 
-const trimSlashes = <T>(str: T) => {
-  if (typeof str === "string") {
-    let stripFirst = str[0] === "/";
-    let stripLast = str[str.length - 1] === "/";
-    if (stripLast || stripFirst) {
-      // typescript doesn't allow implicit conversion here
-      // `bool ^ 0` is about the fastest way to convert currently
-      // although `+bool` could be used for clarity in the future
-      // `Number(bool)` is very slow and should be avoided.
-      return str.slice(
-        (stripFirst as any) ^ 0,
-        str.length - (stripLast as any) ^ 0,
-      );
-    } else {
-      return str;
-    }
-  } else {
-    return str;
+const trimSlashes = (str: ParamValue) => {
+  if (typeof str !== "string") return str;
+
+  const stripFirst = str[0] === "/";
+  const stripLast = str[str.length - 1] === "/";
+  if (stripLast || stripFirst) {
+    // typescript doesn't allow implicit conversion here
+    // `bool ^ 0` is about the fastest way to convert currently
+    // although `+bool` could be used for clarity in the future
+    // `Number(bool)` is very slow and should be avoided.
+    return str.slice(
+      (stripFirst as unknown as number) ^ 0,
+      str.length - (stripLast as unknown as number) ^ 0,
+    );
   }
+
+  return str;
 };
 
 const convertValue = (value: ParamValue) => {
@@ -50,13 +48,13 @@ const uri = (
   let output = "";
 
   for (let i = 0; i < strings.length; i++) {
-    let string = strings[i];
-    let insert = keys[i];
+    const string = strings[i];
+    const insert = keys[i];
 
     // if both are "empty" or
     // it's the final insert and it's an ? without anything after
     // skip inserting them
-    if (string === "?" || string === "" && insert == null) {
+    if ((string === "?" || string === "") && insert == null) {
       continue;
     }
 

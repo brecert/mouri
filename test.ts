@@ -45,6 +45,11 @@ Deno.test({
       "https://api.example.com/path/a%25b=b%25a",
     );
 
+    assertEquals(
+      uri`${API_URL}/${"/query"}?${{ "a%b": "b%a" }}`,
+      "https://api.example.com/query?a%25b=b%25a",
+    );
+
     // featured example
     assertEquals(
       uri`${API_URL}/users/${id}/posts/${{ limit: limit, offset: offset }}`,
