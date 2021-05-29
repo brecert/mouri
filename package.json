@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "mouri",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple, easy to use, and relatively performant way to create and join uri parts together.",
   "module": "publish/uri.js",
   "types": "uri.ts",
