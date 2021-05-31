@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "mouri",
-  "version": "2.0.0-pre-1",
+  "version": "2.0.0-pre-2",
   "description": "A simple, easy to use, and relatively performant way to create and join uri parts together.",
   "main": "publish/uri.js",
   "module": "publish/uri.js",
@@ -16,7 +16,7 @@
     "tsconfig.json"
   ],
   "scripts": {
-    "test": "deno test",
+    "test": "deno test && deno test --doc uri.ts",
     "bench": "deno run --allow-write --allow-read --allow-hrtime ./bench.ts",
     "bench:update": "deno run --allow-write --allow-read --allow-hrtime ./bench.ts update-readme",
     "build": "tsc"

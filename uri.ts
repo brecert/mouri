@@ -91,20 +91,20 @@ export const convertValue = (value: ParamValue) => {
  *
  * // removed when nothing after
  * assertEquals(
- *   uri`example.com/example?${null}`,
- *   'example.com/example'
+ *   uri`https://example.com/example?${null}`,
+ *   'https://example.com/example'
  * )
  * 
  * // kept when something after
  * assertEquals(
- *   uri`example.com/example?${{}}`,
- *   'example.com/example?'
+ *   uri`https://example.com/example?${{}}`,
+ *   'https://example.com/example?'
  * )
  * 
  * // avoiding `?` cleanup behavior always
  * assertEquals(
- *   uri`example.com/example${['?']}${null}`,
- *   'example.com/example?'
+ *   uri`https://example.com/example${['?']}${null}`,
+ *   'https://example.com/example?'
  * )
  * ```
  *
@@ -115,8 +115,8 @@ export const convertValue = (value: ParamValue) => {
  * # import { uri } from './uri.ts'
  *
  * assertEquals(
- *   uri`example.com/${'hello world?'}`,
- *   'example.com/hello%20world%3F'
+ *   uri`https://example.com/${'hello world?'}`,
+ *   'https://example.com/hello%20world%3F'
  * )
  * ```
  *
@@ -127,8 +127,8 @@ export const convertValue = (value: ParamValue) => {
  * # import { uri } from './uri.ts'
  *
  * assertEquals(
- *   uri`example.com/${{ foo: 'bar', key: (10).toString() }}`,
- *   'example.com/foo=bar&key=10'
+ *   uri`https://example.com/${{ foo: 'bar', key: (10).toString() }}`,
+ *   'https://example.com/foo=bar&key=10'
  * )
  * ```
  *
@@ -139,8 +139,8 @@ export const convertValue = (value: ParamValue) => {
  * # import { uri } from './uri.ts'
  *
  * assertEquals(
- *   uri`example.com/${['get', 'user', 120]}`,
- *   'example.com/get/user/120'
+ *   uri`https://example.com/${['get', 'user', 120]}`,
+ *   'https://example.com/get/user/120'
  * )
  * ```
  *
@@ -151,14 +151,14 @@ export const convertValue = (value: ParamValue) => {
  *
  * // before
  * assertEquals(
- *   uri`example.com/${'>///<'}`,
- *  'example.com/%3E%2F%2F%2F%3C'
+ *   uri`https://example.com/${'>///<'}`,
+ *  'https://example.com/%3E%2F%2F%2F%3C'
  * )
  *
  * // after
  * assertEquals(
- *   uri`example.com/${['>///<']}`,
- *   '>///<'
+ *   uri`https://example.com/${['>///<']}`,
+ *   'https://example.com/>///<'
  * )
  * ```
  */
