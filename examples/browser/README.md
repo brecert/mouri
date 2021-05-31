@@ -1,7 +1,7 @@
 # Mouri in a browser example
 
-All you need is to host a this directory for js module context to be allowed.
+All you need is to host this directory for javascript module contexts to be allowed.
 
-A simple way to do this is to go from within this directory.
+A simple way to host this directory enter the directory and run 
 
-> `npx servor .`
+`> npx servor .`
