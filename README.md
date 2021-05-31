@@ -32,9 +32,9 @@ assertEquals(
 
 ## Node
 
-`npm i mouri`
+`> npm i mouri`
 
-```
+```js
 import { strict as assert } from 'assert';
 import uri from 'mouri';
 
