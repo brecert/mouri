@@ -1,5 +1,8 @@
 import { assertEquals } from "https://deno.land/std@0.97.0/testing/asserts.ts";
-import { convertValue, uri } from "./uri.ts";
+import { convertValue, trimSlashes, uri } from "./uri.ts";
+
+// import example for typechecking
+import "./examples/example.ts";
 
 Deno.test({
   name: "uri",
@@ -17,36 +20,46 @@ Deno.test({
 
     assertEquals(
       uri`${API_URL}/${"/path"}`,
+      "https://api.example.com/%2Fpath",
+    );
+
+    assertEquals(
+      uri`${API_URL}/${trimSlashes("/path")}`,
       "https://api.example.com/path",
     );
 
     assertEquals(
-      uri`${API_URL}/${"/path"}/${1}`,
+      uri`${API_URL}/${["/path/"]}${["/test/"]}`,
+      "https://api.example.com//path//test/",
+    );
+
+    assertEquals(
+      uri`${API_URL}/${trimSlashes("/path")}/${1}`,
       "https://api.example.com/path/1",
     );
 
     assertEquals(
-      uri`${API_URL}/${"/path"}/${1}?`,
+      uri`${API_URL}/${trimSlashes("/path")}/${1}?`,
       "https://api.example.com/path/1",
     );
 
     assertEquals(
-      uri`${API_URL}/${"/path"}/left${1}right`,
+      uri`${API_URL}/${trimSlashes("/path")}/left${1}right`,
       "https://api.example.com/path/left1right",
     );
 
     assertEquals(
-      uri`${API_URL}/${"/path"}/${{ "a b": "b a" }}`,
-      "https://api.example.com/path/a+b=b+a",
+      uri`${API_URL}/${trimSlashes("/path")}/${{ "a b": "b a" }}`,
+      "https://api.example.com/path/a%20b=b%20a",
     );
 
     assertEquals(
-      uri`${API_URL}/${"/path"}/${{ "a%b": "b%a" }}`,
+      uri`${API_URL}/${"path"}/${{ "a%b": "b%a" }}`,
       "https://api.example.com/path/a%25b=b%25a",
     );
 
     assertEquals(
-      uri`${API_URL}/${"/query"}?${{ "a%b": "b%a" }}`,
+      uri`${API_URL}/${"query"}?${{ "a%b": "b%a" }}`,
       "https://api.example.com/query?a%25b=b%25a",
     );
 
@@ -74,7 +87,76 @@ Deno.test({
 
     assertEquals(
       convertValue({ bool: "true", other: "✨" }),
-      new URLSearchParams({ bool: "true", other: "✨" }),
+      "bool=true&other=%E2%9C%A8",
     );
   },
+});
+
+Deno.test("example", () => {
+  const API_URL = "https://api.example.com/";
+
+  const userPostsUrl = (id: string, limit: number, offset: number) => {
+    return uri`${API_URL}/users/${id}/posts?${{
+      limit: limit.toString(),
+      offset: offset.toString(),
+    }}`;
+  };
+
+  assertEquals(
+    userPostsUrl("112233445566778899", 10, 5),
+    "https://api.example.com/users/112233445566778899/posts?limit=10&offset=5",
+  );
+});
+
+// TODO: when `deno test --doc` supports running the tests, remove this.
+Deno.test("documentation", () => {
+  const HOST = `https://example.com/`;
+
+  // removed when nothing after
+  assertEquals(
+    uri`example.com/example?${null}`,
+    "example.com/example",
+  );
+
+  // kept when something after
+  assertEquals(
+    uri`example.com/example?${{}}`,
+    "example.com/example?",
+  );
+
+  // avoiding `?` cleanup behavior always
+  assertEquals(
+    uri`example.com/example${["?"]}${null}`,
+    "example.com/example?",
+  );
+
+  assertEquals(
+    uri`${HOST}/example`,
+    "https://example.com/example",
+  );
+
+  assertEquals(
+    uri`example.com/${"hello world?"}`,
+    "example.com/hello%20world%3F",
+  );
+
+  assertEquals(
+    uri`example.com/${{ foo: "bar", key: (10).toString() }}`,
+    "example.com/foo=bar&key=10",
+  );
+
+  assertEquals(
+    uri`example.com/${["get", "user", 120]}`,
+    "example.com/get/user/120",
+  );
+
+  assertEquals(
+    uri`example.com/${">///<"}`,
+    "example.com/%3E%2F%2F%2F%3C",
+  );
+
+  assertEquals(
+    uri`example.com/${[">///<"]}`,
+    "example.com/>///<",
+  );
 });

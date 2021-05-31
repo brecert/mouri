@@ -1,22 +1,35 @@
 {
   "type": "module",
   "name": "mouri",
-  "version": "1.0.1",
+  "version": "2.0.0-pre-1",
   "description": "A simple, easy to use, and relatively performant way to create and join uri parts together.",
+  "main": "publish/uri.js",
   "module": "publish/uri.js",
   "types": "uri.ts",
+  "exports": {
+    "import": "./publish/uri.js",
+    "default": "./publish/uri.js"
+  },
   "files": [
     "publish/*",
     "uri.ts",
     "tsconfig.json"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "deno test",
+    "bench": "deno run --allow-write --allow-read --allow-hrtime ./bench.ts",
+    "bench:update": "deno run --allow-write --allow-read --allow-hrtime ./bench.ts update-readme",
     "build": "tsc"
   },
-  "author": "bree",
-  "license": "MIT",
   "devDependencies": {
     "typescript": "^4.2.4"
-  }
+  },
+  "author": "bree",
+  "repository": "github:brecert/mouri",
+  "license": "MIT",
+  "keywords": [
+    "uri",
+    "url",
+    "join"
+  ]
 }

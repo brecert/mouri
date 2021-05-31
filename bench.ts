@@ -21,7 +21,7 @@ const id = "112233445566778899";
 const limit = 5;
 const offset = 5;
 
-const RUNS = 1000;
+const RUNS = 2000;
 
 bench({
   name: "mouri",
