@@ -3,7 +3,7 @@
 import {
   bench,
   runBenchmarks,
-} from "https://deno.land/std@0.97.0/testing/bench.ts";
+} from "https://deno.land/std@0.122.0/testing/bench.ts";
 
 import {
   defaultColumns,

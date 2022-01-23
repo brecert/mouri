@@ -4,8 +4,8 @@ const API_URL = "https://api.example.com/";
 
 const userPostsUrl = (id, limit, offset) => {
   return uri`${API_URL}/users/${id}/posts?${{
-    limit: limit.toString(),
-    offset: offset.toString(),
+    limit: limit,
+    offset: offset,
   }}`;
 };
 

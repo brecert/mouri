@@ -1,4 +1,4 @@
-import { assertEquals } from "https://deno.land/std@0.97.0/testing/asserts.ts";
+import { assertEquals } from "https://deno.land/std@0.122.0/testing/asserts.ts";
 import { convertValue, trimSlashes, uri } from "./uri.ts";
 
 // import example for typechecking
@@ -10,8 +10,8 @@ Deno.test({
     const API_URL = "https://api.example.com/";
     // UrlSearchParams does not support non-strings
     const id = BigInt("112233445566778899").toString(10);
-    const limit = 5..toString(10);
-    const offset = 5..toString(10);
+    const limit = 5;
+    const offset = 5;
 
     assertEquals(
       uri`${API_URL}/${"path"}`,
@@ -156,7 +156,7 @@ Deno.test("documentation", () => {
   );
 
   assertEquals(
-    uri`https://example.com/${['>///<']}`,
-    'https://example.com/>///<'
-  )
+    uri`https://example.com/${[">///<"]}`,
+    "https://example.com/>///<",
+  );
 });

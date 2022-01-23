@@ -1,10 +1,13 @@
-type ParamValue =
+type Stringify =
   | string
   | number
-  | boolean
+  | boolean;
+
+type ParamValue =
+  | Stringify
   | unknown[]
   | string[][]
-  | Record<string, string>
+  | Record<string, Stringify>
   | URLSearchParams
   | undefined
   | null;
@@ -39,7 +42,7 @@ export const trimSlashes = <T extends ParamValue>(input: T) => {
  * @private
  * Encodes an object into a query string
  */
-export const encodeURLQueryString = (params: Record<string, string>) =>
+export const encodeURLQueryString = (params: Record<string, Stringify>) =>
   Object.keys(params)
     .map((k) => `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`)
     .join("&");
@@ -80,11 +83,11 @@ export const convertValue = (value: ParamValue) => {
  *   'https://example.com/example'
  * )
  * ```
- * 
+ *
  * ## ending `?` cleanup
- * if the template string ends with a `?` 
+ * if the template string ends with a `?`
  * then the ? will be removed if there is no content after it.
- * 
+ *
  * ```js
  * # import { assertEquals } from "https://deno.land/std@0.97.0/testing/asserts.ts"
  * # import { uri } from './uri.ts'
@@ -94,13 +97,13 @@ export const convertValue = (value: ParamValue) => {
  *   uri`https://example.com/example?${null}`,
  *   'https://example.com/example'
  * )
- * 
+ *
  * // kept when something after
  * assertEquals(
  *   uri`https://example.com/example?${{}}`,
  *   'https://example.com/example?'
  * )
- * 
+ *
  * // avoiding `?` cleanup behavior always
  * assertEquals(
  *   uri`https://example.com/example${['?']}${null}`,
@@ -172,10 +175,10 @@ export const uri = (
     let string = strings[i];
     const insert = keys[i];
 
-    // if it's the final insert and it's an ? 
+    // if it's the final insert and it's an ?
     // without anything after, skip inserting them
-    if(string.endsWith('?') && insert == null) {
-      string = string.slice(0, string.length - 1)
+    if (string.endsWith("?") && insert == null) {
+      string = string.slice(0, string.length - 1);
     }
 
     // if it's the first insert with nothing before it

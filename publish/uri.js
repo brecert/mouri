@@ -78,20 +78,20 @@ export const convertValue = (value) => {
  *
  * // removed when nothing after
  * assertEquals(
- *   uri`example.com/example?${null}`,
- *   'example.com/example'
+ *   uri`https://example.com/example?${null}`,
+ *   'https://example.com/example'
  * )
  *
  * // kept when something after
  * assertEquals(
- *   uri`example.com/example?${{}}`,
- *   'example.com/example?'
+ *   uri`https://example.com/example?${{}}`,
+ *   'https://example.com/example?'
  * )
  *
  * // avoiding `?` cleanup behavior always
  * assertEquals(
- *   uri`example.com/example${['?']}${null}`,
- *   'example.com/example?'
+ *   uri`https://example.com/example${['?']}${null}`,
+ *   'https://example.com/example?'
  * )
  * ```
  *
@@ -102,8 +102,8 @@ export const convertValue = (value) => {
  * # import { uri } from './uri.ts'
  *
  * assertEquals(
- *   uri`example.com/${'hello world?'}`,
- *   'example.com/hello%20world%3F'
+ *   uri`https://example.com/${'hello world?'}`,
+ *   'https://example.com/hello%20world%3F'
  * )
  * ```
  *
@@ -114,8 +114,8 @@ export const convertValue = (value) => {
  * # import { uri } from './uri.ts'
  *
  * assertEquals(
- *   uri`example.com/${{ foo: 'bar', key: (10).toString() }}`,
- *   'example.com/foo=bar&key=10'
+ *   uri`https://example.com/${{ foo: 'bar', key: (10).toString() }}`,
+ *   'https://example.com/foo=bar&key=10'
  * )
  * ```
  *
@@ -126,8 +126,8 @@ export const convertValue = (value) => {
  * # import { uri } from './uri.ts'
  *
  * assertEquals(
- *   uri`example.com/${['get', 'user', 120]}`,
- *   'example.com/get/user/120'
+ *   uri`https://example.com/${['get', 'user', 120]}`,
+ *   'https://example.com/get/user/120'
  * )
  * ```
  *
@@ -138,14 +138,14 @@ export const convertValue = (value) => {
  *
  * // before
  * assertEquals(
- *   uri`example.com/${'>///<'}`,
- *  'example.com/%3E%2F%2F%2F%3C'
+ *   uri`https://example.com/${'>///<'}`,
+ *  'https://example.com/%3E%2F%2F%2F%3C'
  * )
  *
  * // after
  * assertEquals(
- *   uri`example.com/${['>///<']}`,
- *   '>///<'
+ *   uri`https://example.com/${['>///<']}`,
+ *   'https://example.com/>///<'
  * )
  * ```
  */
@@ -154,9 +154,9 @@ export const uri = (strings, ...keys) => {
     for (let i = 0; i < strings.length; i++) {
         let string = strings[i];
         const insert = keys[i];
-        // if it's the final insert and it's an ? 
+        // if it's the final insert and it's an ?
         // without anything after, skip inserting them
-        if (string.endsWith('?') && insert == null) {
+        if (string.endsWith("?") && insert == null) {
             string = string.slice(0, string.length - 1);
         }
         // if it's the first insert with nothing before it
